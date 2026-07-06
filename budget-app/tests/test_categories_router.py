@@ -40,7 +40,6 @@ def test_delete_category(auth_headers):
     # Create category first
     resp = client.post("/categories/", json={"name": "DeleteMe"}, headers=auth_headers)
     category_id = resp.json()["id"]
-   # breakpoint()
     # Delete category
     resp = client.delete(f"/categories/DeleteMe", headers=auth_headers)
     assert resp.status_code == 200

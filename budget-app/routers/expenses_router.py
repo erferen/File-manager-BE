@@ -13,7 +13,6 @@ router = APIRouter(prefix="/expenses", tags=["Expenses"])
 
 
 class ExpenseCreate(BaseModel):
-    # user_id: int
     amount: float
     description: str
     category_id: int

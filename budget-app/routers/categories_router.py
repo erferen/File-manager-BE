@@ -14,7 +14,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 # Create a new category
 @router.post("/", response_model=CategoryResponse)
 def create_category(category: CategoryCreate, current_user: Annotated[User, Depends(get_current_user)], db: Session = Depends(get_db)):
-    # new_category = Category(**category.model_dump())
     new_category = Category(name=category.name, user_id=current_user.id)
     db.add(new_category)
     db.commit()
@@ -25,7 +24,6 @@ def create_category(category: CategoryCreate, current_user: Annotated[User, Depe
 # Read all categories
 @router.get("/", response_model=List[CategoryResponse])
 def get_categories(current_user: Annotated[User, Depends(get_current_user)], db: Session = Depends(get_db)):
-    #categories = db.query(Category).all()
     categories =  db.query(Category).filter(Category.user_id == current_user.id).all()
     return categories
 
