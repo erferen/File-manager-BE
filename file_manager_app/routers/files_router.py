@@ -20,7 +20,7 @@ def list_files(
     if name:
         query = query.filter(DBFile.name.contains(name))
 
-    if folder_id:
+    if folder_id is not None:
         query = query.filter(DBFile.folder_id == folder_id)
 
     return query.offset(offset).limit(limit).all()
